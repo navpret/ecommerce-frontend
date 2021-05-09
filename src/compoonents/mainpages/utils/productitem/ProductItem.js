@@ -3,9 +3,12 @@ import { Link } from 'react-router-dom'
 import BtnRenderer from '../../products/BtnRenderer'
 import './productItem.css'
 
-export default function ProductItem({product}) {
+export default function ProductItem({product, isAdmin }) {
     return (
         <div className="product_card">
+            {
+                isAdmin && <input type="checkbox" chacked={product.checked} />
+            }   
             <Link to={`/detail/${product._id}`} >
                 <img src={product.images[0].url} alt={product.title + "'s Image"} />
                 <div className="product_box">
@@ -16,7 +19,7 @@ export default function ProductItem({product}) {
             </Link>
 
             <div className="row_btn">
-                <BtnRenderer />
+                <BtnRenderer product={product} />
             </div>
         </div>
     )

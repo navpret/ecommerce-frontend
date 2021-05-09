@@ -8,15 +8,19 @@ export const GlobalState = createContext()
 export const DataProvider = ({ children }) => {
     const [token, setToken] = useState(false)
 
-    const refreshToken = async () => {
-        const res = await axios.get('/user/refresh_token')
-    
-        setToken(res.data.accesstoken)
-    }
-
     useEffect(() => {
-        // const firstLogin = localStorage.getItem('firstLogin')
-        refreshToken()
+        const previousLogin = localStorage.getItem('firstLogin')
+
+        if (previousLogin) {
+            const refreshToken = async () => {
+                axios.get('/user/refresh_token').then(res => {
+                    setToken(res.data.accesstoken)
+                }).catch(err => {
+                    alert(err.response.data.message)
+                })
+            }
+            refreshToken()
+        }
     }, [])
 
     ProductsAPI()

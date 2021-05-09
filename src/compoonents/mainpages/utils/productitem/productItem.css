@@ -27,6 +27,11 @@
 .product_card span{
     color: crimson;
 }
+.product_card input{
+    position: absolute;
+    width: 25px;
+    height: 25px;
+}
 .product_box p{
     width: 100%;
     display: -webkit-box;

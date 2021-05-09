@@ -10,11 +10,13 @@ export default function Register() {
     const handleSubmit = async e => {
         e.preventDefault()
         try {
-            await axios.post('/user/register', {...user})
+            await axios.post('/user/register', {...user}).then(res => {
+                localStorage.setItem('firstLogin', true)
+                window.location.href = '/'
+            }).catch(err => {
+                alert(err.response.data.message)
+            } )
 
-            localStorage.setItem('firstLogin', true)
-
-            window.location.href = '/'
         } catch (error) {
             alert(error.response.data.message)
         }
