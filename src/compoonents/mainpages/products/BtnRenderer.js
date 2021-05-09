@@ -10,10 +10,10 @@ export default function BtnRenderer({ product }) {
     const NormalButtons = () => {
         return (
             <>
-                <Link className="btn_buy" to="#!" onClick={() => {addCart(product)}}>
+                <Link className="btn_buy" to="/cart" onClick={() => {addCart(product)}}>
                         Buy
                     </Link>
-                <Link className="btn_cart" to="#!">
+                <Link className="btn_cart" to="/cart">
                     +Cart
                 </Link>
             </>

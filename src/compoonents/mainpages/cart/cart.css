@@ -1,7 +1,6 @@
-.cart{
+.card{
     position: relative;
     border: 1px solid #ccc;
-    transform: scaleY(0.9)
 }
 .amount span{
     color: crimson;

@@ -5,6 +5,8 @@ export default function UserAPI(token) {
     const [isLogged, setIsLogged] = useState(false)
     const [isAdmin, setIsAdmin] = useState(false)
     const [cart, setCart] = useState([])
+    const [history, setHistory] = useState([])
+    const [callback, setCallback] = useState(false)
 
     useEffect(() => {
         if (token) {
@@ -15,6 +17,7 @@ export default function UserAPI(token) {
                     }).then(res => {
                         setIsLogged(true)
                         res.data.role === 1 ? setIsAdmin(true) : setIsAdmin(false)
+                        setCart(res.data.cart)
                     })
 
                 } catch (error) {
@@ -22,9 +25,22 @@ export default function UserAPI(token) {
                 }
             }
 
+            const getHistory = async () => {
+                const res = await axios.get('/user/history', {
+                    headers: {
+                        Authorization: token
+                    }
+                })
+
+                setHistory(res.data)
+            }
+
+
             getUser()
+            getHistory()
         }
-    }, [token])
+    }, [token, callback])
+
 
     const addCart = async (product) => {
         if (!isLogged) return alert("You need to be logged in to add to cart")
@@ -33,10 +49,12 @@ export default function UserAPI(token) {
             return item._id !== product._id
         })
         if (check) {
-            setCart([...cart, {...product, quantity: 1}])
 
-            axios.patch('/addcart', { cart: [ ...cart, { ...product, quantity: 1 } ] }, {
+            axios.patch('/user/addcart', { cart: [ ...cart, { ...product, quantity: 1 } ] }, {
                 headers: { Authorization: token }
+            }).then(res => {
+                
+                setCart([ ...cart, { ...product, quantity: 1 } ])
             }).catch(err => {
                 alert(err)
             })
@@ -49,6 +67,8 @@ export default function UserAPI(token) {
         isLogged: [ isLogged, setIsLogged ],
         isAdmin: [ isAdmin, setIsAdmin ],
         cart: [cart, setCart],
-        addCart: addCart
+        addCart: addCart,
+        history: [history, setHistory],
+        callback: [callback, setCallback]
     }
 }
