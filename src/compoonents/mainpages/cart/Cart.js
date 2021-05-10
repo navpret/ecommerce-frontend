@@ -7,9 +7,8 @@ export default function Cart() {
     const state = useContext(GlobalState)
     const [cart, setCart] = state.userAPI.cart
     const addCart = state.userAPI.addCart
-    const [token] = state.token
-    const [callback, setCallback] = state.userAPI.callback
-    const [total, setTotal] = useState(0) 
+    const [token] = state.userAPI.token
+     const [total, setTotal] = useState(0) 
 
     useEffect(() => {
         const getTotal = () => {
@@ -37,7 +36,6 @@ export default function Cart() {
         })
 
         setCart([...cart])
-        addCart("")
         addToCart(cart)
     }
 
@@ -74,7 +72,6 @@ export default function Cart() {
         setCart([])
         addToCart([])
         alert("You have successfully placed an order")
-        setCallback(!callback)
     }
 
     if (cart.length === 0) {
@@ -90,7 +87,7 @@ export default function Cart() {
                     cart.map(product => {
                         return (
                             <div className="detail card" key={product._id}>
-                                <img src={product.images[0].url} alt={product.title} className="img_container" />
+                                <img src={product.images && product.images[0].url} alt={product.title} className="img_container" />
                                 <div className="box-detail">
                                     <h2>{product.title}</h2>
                                     <h3>$ {product.price * product.quantity}</h3>

@@ -8,6 +8,8 @@ import './orderHistory.css'
 export default function OrderHistory() {
     const state = useContext(GlobalState)
     const [history] = state.userAPI.history
+    const [isAdmin] = state.userAPI.isAdmin
+    const [token] = state.userAPI.token
     console.log("histroy", history)
 
     return (
@@ -33,7 +35,7 @@ export default function OrderHistory() {
                                     <td>{index + 1}</td>
                                     <td>{item.cart.length}</td>
                                     <td>{moment(item.createdAt).format("DD MMM, YYYY")}</td>
-                                    <Link to={`/history/${item._id}`}>View</Link>
+                                    <td><Link to={`/history/${item._id}`}>View</Link></td>
                                 </tr>
                             )
                         })

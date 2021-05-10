@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 
 export default function UserAPI(token) {
     const [isLogged, setIsLogged] = useState(false)
@@ -7,6 +7,24 @@ export default function UserAPI(token) {
     const [cart, setCart] = useState([])
     const [history, setHistory] = useState([])
     const [callback, setCallback] = useState(false)
+
+    const getHistory = useCallback(async () => {
+        if (isAdmin) {
+            const res = await axios.get('/user/order', {
+                headers: {
+                    Authorization: token
+                }
+            })
+            setHistory(res.data)
+        } else {
+            const res = await axios.get('/user/history', {
+                headers: {
+                    Authorization: token
+                }
+            })
+            setHistory(res.data)
+        }
+    }, [isAdmin, token])
 
     useEffect(() => {
         if (token) {
@@ -25,21 +43,10 @@ export default function UserAPI(token) {
                 }
             }
 
-            const getHistory = async () => {
-                const res = await axios.get('/user/history', {
-                    headers: {
-                        Authorization: token
-                    }
-                })
-
-                setHistory(res.data)
-            }
-
-
             getUser()
             getHistory()
         }
-    }, [token, callback])
+    }, [token, callback, isAdmin, isLogged, getHistory])
 
 
     const addCart = async (product) => {
@@ -65,6 +72,7 @@ export default function UserAPI(token) {
 
     return {
         isLogged: [ isLogged, setIsLogged ],
+        token: [token],
         isAdmin: [ isAdmin, setIsAdmin ],
         cart: [cart, setCart],
         addCart: addCart,

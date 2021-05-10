@@ -7,7 +7,7 @@ export default function ProductItem({product, isAdmin }) {
     return (
         <div className="product_card">
             {
-                isAdmin && <input type="checkbox" chacked={product.checked} />
+                isAdmin && <input type="checkbox" checked={product.checked} />
             }   
             <Link to={`/detail/${product._id}`} >
                 <img src={product.images[0].url} alt={product.title + "'s Image"} />
