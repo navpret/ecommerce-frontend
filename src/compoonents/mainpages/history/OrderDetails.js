@@ -18,7 +18,7 @@ export default function OrderDetails() {
             }) 
         }
 
-    }, [])
+    }, [history, params.id])
 
     console.log("Order details", orderDetails)
 

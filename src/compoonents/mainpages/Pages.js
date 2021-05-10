@@ -9,6 +9,7 @@ import Cart from './cart/Cart'
 import OrderHistory from './history/OrderHistory'
 import OrderDetails from './history/OrderDetails'
 import AddProduct from '../mainpages/addProduct/AddProduct'
+import DeleteProduct from '../mainpages/deleteProduct/DeleteProduct'
 import NotFound from './utils/notfound/NotFound'
 
 export default function Pages() {
@@ -31,6 +32,7 @@ export default function Pages() {
 
             {/* Admin Functions */}
             <Route path="/add_product" component={isAdmin? AddProduct: NotFound} />
+            <Route path="/delete_product/:id" component={isAdmin? DeleteProduct: NotFound} />
 
             {/* Miscellaneous Functions */}
             <Route path="*" exact component={NotFound} />

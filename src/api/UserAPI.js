@@ -10,7 +10,7 @@ export default function UserAPI(token) {
 
     const getHistory = useCallback(async () => {
         if (isAdmin) {
-            const res = await axios.get('/user/order', {
+            const res = await axios.get('/api/order', {
                 headers: {
                     Authorization: token
                 }

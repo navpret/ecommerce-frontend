@@ -6,9 +6,9 @@ import './cart.css'
 export default function Cart() {
     const state = useContext(GlobalState)
     const [cart, setCart] = state.userAPI.cart
-    const addCart = state.userAPI.addCart
+    // const addCart = state.userAPI.addCart
     const [token] = state.userAPI.token
-     const [total, setTotal] = useState(0) 
+    const [total, setTotal] = useState(0) 
 
     useEffect(() => {
         const getTotal = () => {

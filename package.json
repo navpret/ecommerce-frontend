@@ -44,6 +44,6 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://ecommerce-backend-wlv.herokuapp.com",
-  "p_proxy": "http://localhost:4021"
+  "p_proxy": "https://ecommerce-backend-wlv.herokuapp.com",
+  "proxy": "http://localhost:4021"
 }

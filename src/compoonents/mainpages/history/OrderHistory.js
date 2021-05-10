@@ -8,8 +8,8 @@ import './orderHistory.css'
 export default function OrderHistory() {
     const state = useContext(GlobalState)
     const [history] = state.userAPI.history
-    const [isAdmin] = state.userAPI.isAdmin
-    const [token] = state.userAPI.token
+    // const [isAdmin] = state.userAPI.isAdmin
+    // const [token] = state.userAPI.token
     console.log("histroy", history)
 
     return (
